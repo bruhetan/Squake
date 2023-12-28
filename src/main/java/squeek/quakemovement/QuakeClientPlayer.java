@@ -179,7 +179,7 @@ public class QuakeClientPlayer {
     private static void spawnBunnyhopParticles(PlayerEntity player, int numParticles) {
         // taken from sprint
         int j = MathHelper.floor(player.getX());
-        int i = MathHelper.floor(player.getY() - 0.20000000298023224D - player.getHeightOffset());
+        int i = MathHelper.floor(player.getY() - 0.20000000298023224D - player.getEyeHeight(player.getPose()));
         int k = MathHelper.floor(player.getZ());
         BlockState blockState = player.getWorld().getBlockState(new BlockPos(j, i, k));
 
