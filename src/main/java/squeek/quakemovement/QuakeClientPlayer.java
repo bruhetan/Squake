@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.particle.BlockStateParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
@@ -42,8 +43,9 @@ public class QuakeClientPlayer {
         if ((player.getAbilities().flying || player.isFallFlying()) && !player.hasVehicle()) return false;
         else didQuakeMovement = quake_travel(player, movementInput);
 
-        if (didQuakeMovement)
-            player.increaseTravelMotionStats(player.getX() - d0, player.getY() - d1, player.getZ() - d2);
+        if (player instanceof ServerPlayerEntity serverPlayer && didQuakeMovement) {
+            serverPlayer.increaseTravelMotionStats(player.getX() - d0, player.getY() - d1, player.getZ() - d2);
+        }
 
         return didQuakeMovement;
     }
